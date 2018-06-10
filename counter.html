@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Bloc</title>
+  </head>
+
+  <body>
+    <!-- Declare a container for our UI -->
+    <div id="app"></div>
+
+    <!-- Load React and React-DOM to render React into a DOM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
+
+    <!-- Load Babel-Core to enable JSX and ES6 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+    <!-- Write our code in a script block that enables ES6 -->
+    <script type="text/babel">
+
+    // define the Counter React component
+    // Important note: don't write to this.props from WITHIN the component definition.
+    // This ensures the props are immutable and keeps data flow unidirectional.
+      class Counter extends React.Component {
+        // Constructor is run as soon as React goes to build an instance of Counter, so it immediately sets a `state` value.
+        // We'll see how components manage `state` with `events` in the next checkpoint.
+        // `this.state.number` being set to 1 is essentially a stub here.
+        constructor(props){
+          super(props);
+          this.state = {
+            number: 1
+          }
+        }
+
+        render() {
+          return (
+            <div>
+              <img src={this.props.image} alt="Bloc Logo"/>
+              <h2>Current program: {this.props.label}</h2>
+              <h3>Current week: {this.state.number}</h3>
+              <p>Current Date: {this.props.date.toLocaleDateString()}</p>
+            </div>
+          );
+        }
+      }
+
+      // sets an unchangeable variable, const info, containing a date and an image
+      const info = {
+        date: new Date(),
+        image: 'https://avatars0.githubusercontent.com/u/1441485?v=4&s=280',
+      }
+
+      // defaultProps sets label to "Web Developer Track" unless a label is explicitly passed in
+      Counter.defaultProps = {
+        label: "Web Developer Track"
+      }
+
+      // since defaultProps sets the label, we don't need to pass one in when calling the Counter component
+      ReactDOM.render(
+        <Counter
+          date={info.date}
+          image={info.image}
+        />,
+        document.getElementById('app')
+      );
+      // I edited the ReactDOM.render call above to be a bit more readable when passed multiple props
+
+    </script>
+  </body>
+</html>
