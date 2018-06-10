@@ -22,9 +22,11 @@
         // The render method. All React components have this. It returns HTML to render.
         // Components must return a single root element, which is why Hello World is wrapped in a div.
         render() {
+          // The `name` prop is called through `this.props.name`
+          // The prop is interpolated in JSX HTML with brackets
           return (
             <div>
-              <h1>Hello World!</h1>
+              <h1>Hello {this.props.name}!</h1>
             </div>
           );
         }
@@ -34,7 +36,9 @@
       ReactDOM.render(
         // The second argument is the HTML element in which to render our component.
         // So, the second argument tells `Greeting` to render inside the div with the ID of `app`.
-        <Greeting />, document.getElementById('app')
+        <Greeting name="Bloc Student"/>, document.getElementById('app')
+        // Greeting is passed in one prop: `name`, which is set to "Bloc Student"
+        // One line this call when there is only one prop
       );
     </script>
   </body>
