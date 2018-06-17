@@ -22,7 +22,8 @@
     // Important note: don't write to this.props from WITHIN the component definition.
     // This ensures the props are immutable and keeps data flow unidirectional.
       class Counter extends React.Component {
-        // Constructor is run as soon as React goes to build an instance of Counter, so it immediately sets a `state` value.
+        // Constructor is run as soon as React goes to build an instance of Counter,
+        // so it immediately sets a `state` value.
         // We'll see how components manage `state` with `events` in the next checkpoint.
         // `this.state.number` being set to 1 is essentially a stub here.
         constructor(props){
@@ -32,12 +33,29 @@
           }
         }
 
+        increment(event) {
+          this.setState({
+            number: this.state.number + 1
+          })
+        }
+
+        decrement(event) {
+          this.setState({
+            // Math.max prevents the Bloc student's week number in the course
+            // from going below 1
+            number: Math.max(1, this.state.number - 1)
+          })
+        }
+
         render() {
+          // Class methods are not bound by default- they are bound by events above
           return (
             <div>
               <img src={this.props.image} alt="Bloc Logo"/>
               <h2>Current program: {this.props.label}</h2>
               <h3>Current week: {this.state.number}</h3>
+                <button onClick={this.increment.bind(this)}>Increment</button>
+                <button onClick={this.decrement.bind(this)}>Decrement</button>
               <p>Current Date: {this.props.date.toLocaleDateString()}</p>
             </div>
           );
